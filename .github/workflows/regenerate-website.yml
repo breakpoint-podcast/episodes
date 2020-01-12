@@ -1,0 +1,19 @@
+name: Regenerate Website
+
+on:
+  - release
+
+jobs:
+  dispatch-event:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch event
+        env:
+          DISPATCH_GITHUB_TOKEN: ${{ secrets.DISPATCH_GITHUB_TOKEN }}
+          DISPATCH_REPOSITORY: breakpoint-podcast/breakpoint-podcast.github.io
+        run: |
+          curl -i -v https://api.github.com/repos/${DISPATCH_REPOSITORY}/dispatches \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: token ${DISPATCH_GITHUB_TOKEN}" \
+            --request POST \
+            --data '{"event_type": "publish"}'
