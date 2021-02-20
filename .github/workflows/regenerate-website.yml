@@ -12,8 +12,7 @@ jobs:
           DISPATCH_GITHUB_TOKEN: ${{ secrets.DISPATCH_GITHUB_TOKEN }}
           DISPATCH_REPOSITORY: breakpoint-podcast/breakpoint-podcast.github.io
         run: |
-          curl -i -v https://api.github.com/repos/${DISPATCH_REPOSITORY}/dispatches \
-            -H "Accept: application/vnd.github.everest-preview+json" \
+          curl -v https://api.github.com/repos/${DISPATCH_REPOSITORY}/dispatches \
+            -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${DISPATCH_GITHUB_TOKEN}" \
-            --request POST \
             --data '{"event_type": "publish"}'
